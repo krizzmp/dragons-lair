@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DragonsLair_1
 {
@@ -12,6 +13,7 @@ namespace DragonsLair_1
              * TODO: Calculate for each team how many times they have won
              * Sort based on number of matches won (descending)
              */
+
             Console.WriteLine("Implement this method!");
         }
 

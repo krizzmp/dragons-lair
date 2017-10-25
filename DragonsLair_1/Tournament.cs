@@ -13,7 +13,8 @@ namespace DragonsLair_1
 
         public List<Team> GetTeams()
         {
-            return new List<Team>(new Team[] {
+            return new List<Team>(new Team[]
+            {
                 new Team("The Valyrians"),
                 new Team("The Spartans"),
                 new Team("The Cretans"),
@@ -29,7 +30,7 @@ namespace DragonsLair_1
         {
             return 3;
         }
-        
+
         public Round GetRound(int idx)
         {
             Round r = new Round();
@@ -58,7 +59,6 @@ namespace DragonsLair_1
                 match4.SecondOpponent = new Team("The Corinthians");
                 match4.Winner = new Team("The Corinthians");
                 r.AddMatch(match4);
-
             }
             else if (idx == 1)
             {

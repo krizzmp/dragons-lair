@@ -5,7 +5,7 @@ namespace DragonsLair_1
     public class Menu
     {
         private Controller control = null;
-        
+
         public Menu()
         {
             control = new Controller();
@@ -57,7 +57,7 @@ namespace DragonsLair_1
             Console.Write("Indtast dit valg: ");
             return Console.ReadLine();
         }
-        
+
         private void ShowScore()
         {
             Console.Write("Angiv navn på liga: ");
