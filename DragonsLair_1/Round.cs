@@ -11,11 +11,13 @@ namespace DragonsLair_1 {
 
         public Match GetMatch(string teamName1, string teamName2) {
             return matches.Where(m => (
-                m.FirstOpponent.Name == teamName1 ||
-                m.FirstOpponent.Name == teamName2 ||
-                m.SecondOpponent.Name == teamName1 ||
-                m.SecondOpponent.Name == teamName2
-            )).Single();
+                                          m.FirstOpponent.Name == teamName1 &&
+                                          m.SecondOpponent.Name == teamName2
+                                      ) || (
+                                          m.SecondOpponent.Name == teamName1 &&
+                                          m.FirstOpponent.Name == teamName2
+                                      )
+            ).Single();
         }
 
         public bool IsMatchesFinished() {
