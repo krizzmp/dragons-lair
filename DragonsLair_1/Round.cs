@@ -37,7 +37,10 @@ namespace DragonsLair_1
             foreach (var Match in matches)
             {
                 Team Winner = Match.Winner;
-                WinningTeams.Add(Winner);
+                if (Winner != null)
+                {
+                    WinningTeams.Add(Winner);
+                }
             }
             // TODO: Implement this method
             return WinningTeams;
@@ -45,21 +48,22 @@ namespace DragonsLair_1
 
         public List<Team> GetLosingTeams()
         {
-            List<Team> LosingTeams = new List<Team>();
+            List<Team> losingTeams = new List<Team>();
             
-            foreach(var Match in matches)
+            foreach(var match in matches)
             {
-                Team Winner = Match.Winner;
-                if(Winner == Match.FirstOpponent)
+                Team winner = match.Winner;
+                if(winner == match.FirstOpponent)
                 {
-                    LosingTeams.Add(Match.SecondOpponent);
-                }else if (Winner == Match.SecondOpponent)
+                    losingTeams.Add(match.SecondOpponent);
+                }else if (winner == match.SecondOpponent)
                 {
-                    LosingTeams.Add(Match.FirstOpponent);
+                    losingTeams.Add(match.FirstOpponent);
                 }
+                //losingTeams.Add(winner);
             }
            
-            return LosingTeams;
+            return losingTeams;
         }
     }
 }
