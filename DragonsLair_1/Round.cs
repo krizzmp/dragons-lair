@@ -17,10 +17,8 @@ namespace DragonsLair_1
             return null;
         }
 
-        public bool IsMatchesFinished()
-        {
-            // TODO: Implement this method
-            return false;
+        public bool IsMatchesFinished() {
+            return matches.TrueForAll(m => m.Winner != null);
         }
 
         public List<Team> GetWinningTeams()
