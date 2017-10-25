@@ -12,7 +12,7 @@ namespace DragonsLair_1
             {
                 return winterTournament;
             }
-            return null;
+            return winterTournament;
         }
     }
 }
