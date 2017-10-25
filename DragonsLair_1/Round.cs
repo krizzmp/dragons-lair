@@ -6,7 +6,6 @@ namespace DragonsLair_1
     public class Round
     {
         private List<Match> matches = new List<Match>();
-  
 
 
         public void AddMatch(Match m)
@@ -14,7 +13,8 @@ namespace DragonsLair_1
             matches.Add(m);
         }
 
-        public Match GetMatch(string teamName1, string teamName2) {
+        public Match GetMatch(string teamName1, string teamName2)
+        {
             return matches.Where(m => (
                                           m.FirstOpponent.Name == teamName1 &&
                                           m.SecondOpponent.Name == teamName2
@@ -25,13 +25,13 @@ namespace DragonsLair_1
             ).Single();
         }
 
-        public bool IsMatchesFinished() {
+        public bool IsMatchesFinished()
+        {
             return matches.TrueForAll(m => m.Winner != null);
         }
 
         public List<Team> GetWinningTeams()
         {
-            
             List<Team> WinningTeams = new List<Team>();
 
             foreach (var Match in matches)
@@ -48,22 +48,22 @@ namespace DragonsLair_1
 
         public List<Team> GetLosingTeams()
         {
-            List<Team> losingTeams = new List<Team>();
-            
-            foreach(var match in matches)
+            List<Team> LosingTeams = new List<Team>();
+
+            foreach (var Match in matches)
             {
-                Team winner = match.Winner;
-                if(winner == match.FirstOpponent)
+                string WinnerName = Match.Winner.Name ?? "";
+                if (WinnerName == Match.FirstOpponent.Name)
                 {
-                    losingTeams.Add(match.SecondOpponent);
-                }else if (winner == match.SecondOpponent)
-                {
-                    losingTeams.Add(match.FirstOpponent);
+                    LosingTeams.Add(Match.SecondOpponent);
                 }
-                //losingTeams.Add(winner);
+                else if (WinnerName == Match.SecondOpponent.Name)
+                {
+                    LosingTeams.Add(Match.FirstOpponent);
+                }
             }
-           
-            return losingTeams;
+
+            return LosingTeams;
         }
     }
 }
