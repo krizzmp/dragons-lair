@@ -37,7 +37,10 @@ namespace DragonsLair_1
             foreach (var Match in matches)
             {
                 Team Winner = Match.Winner;
-                WinningTeams.Add(Winner);
+                if (Winner != null)
+                {
+                    WinningTeams.Add(Winner);
+                }
             }
             // TODO: Implement this method
             return WinningTeams;

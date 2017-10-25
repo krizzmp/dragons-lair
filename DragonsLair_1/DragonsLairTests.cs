@@ -33,7 +33,7 @@ namespace DragonsLair_1
             {
                 Round currentRound = currentTournament.GetRound(round);
                 int numberOfWinningTeams = currentRound.GetWinningTeams().Count;
-                int numberOfLosingTeams = currentRound.GetLosingTeams().Count();
+                int numberOfLosingTeams = currentRound.GetLosingTeams().Count;
                 Assert.AreEqual(numberOfWinningTeams, numberOfLosingTeams);
             }
         }
