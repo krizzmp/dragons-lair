@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DragonsLair_1
 {
@@ -25,8 +26,16 @@ namespace DragonsLair_1
 
         public List<Team> GetWinningTeams()
         {
+            
+            List<Team> WinningTeams = new List<Team>();
+
+            foreach (var Match in matches)
+            {
+                Team Winner = Match.Winner;
+                WinningTeams.Add(Winner);
+            }
             // TODO: Implement this method
-            return null;
+            return WinningTeams;
         }
 
         public List<Team> GetLosingTeams()
