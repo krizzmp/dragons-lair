@@ -9,59 +9,6 @@ namespace DragonsLair_1
     {
         private TournamentRepo tournamentRepository = new TournamentRepo();
 
-        public void ShowScore_(string tournamentName)
-        {
-            /*
-             * TODO: Calculate for each team how many times they have won
-             * Sort based on number of matches won (descending)
-             */
-            Tournament tournament = tournamentRepository.GetTournament(tournamentName);
-            IEnumerable<Round> rounds = GetRounds(tournament);
-            var enumerable = rounds
-                .SelectMany(r => r.GetWinningTeams())
-                .GroupBy(t => t.Name)
-                .Select(g => new
-                    {
-                        points = g.Count(),
-                        teamName = g.Key
-                    }
-                )
-                .ToDictionary(e => e.teamName);
-            string scores = tournament.GetTeams()
-                .Select(t =>
-                {
-                    var points = enumerable.ContainsKey(t.Name) ? enumerable[t.Name].points : 0;
-                    return new {TeamName = t.Name, Points = points};
-                })
-                .OrderByDescending(e => e.Points)
-                .Select(e => $"{e.TeamName.PadRight(20)} | points: {e.Points}")
-                .Aggregate((a, b) => a + "\n" + b);
-            Console.WriteLine(scores);
-        }
-
-        public void ShowScore__(string tournamentName)
-        {
-            Tournament tournament = tournamentRepository.GetTournament(tournamentName);
-            IEnumerable<Round> rounds = GetRounds(tournament);
-
-            IEnumerable<string> scores = rounds
-                .SelectMany(r => r.GetWinningTeams())
-                // IEnumerable<Team> : list of all winning teams with each team being reprecented as many times as they have won
-                .Concat(tournament.GetTeams())
-                // IEnumerable<Team> : list of all winning teams + all teams
-                .GroupBy(team => team.Name)
-                // IEnumerable<IGrouping<string, Team>> : a list of groups of teams grouped by team name
-                .OrderByDescending(group => group.Count() - 1)
-                // sorted by number of wins in decending order
-                .Select(group => $"{group.Key.PadRight(20)} | points: {group.Count() - 1}");
-                // list of strings eg. "teamName             | points: 1"
-                // we have to subtract one from count because we added all the teams to the winning teams so they are counted twice
-            foreach (string score in scores)
-            {
-                Console.WriteLine(score);
-            }
-        }
-
         public void ShowScore(string tournamentName)
         {
             Tournament tournament = tournamentRepository.GetTournament(tournamentName);
