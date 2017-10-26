@@ -9,7 +9,7 @@ namespace DragonsLair_1
     {
         private TournamentRepo tournamentRepository = new TournamentRepo();
 
-        public void ShowScore(string tournamentName)
+        public void ShowScore_(string tournamentName)
         {
             /*
              * TODO: Calculate for each team how many times they have won
@@ -37,6 +37,55 @@ namespace DragonsLair_1
                 .Select(e => $"{e.TeamName.PadRight(20)} | points: {e.Points}")
                 .Aggregate((a, b) => a + "\n" + b);
             Console.WriteLine(scores);
+        }
+
+        public void ShowScore__(string tournamentName)
+        {
+            Tournament tournament = tournamentRepository.GetTournament(tournamentName);
+            IEnumerable<Round> rounds = GetRounds(tournament);
+
+            IEnumerable<string> scores = rounds
+                .SelectMany(r => r.GetWinningTeams())
+                // IEnumerable<Team> : list of all winning teams with each team being reprecented as many times as they have won
+                .Concat(tournament.GetTeams())
+                // IEnumerable<Team> : list of all winning teams + all teams
+                .GroupBy(team => team.Name)
+                // IEnumerable<IGrouping<string, Team>> : a list of groups of teams grouped by team name
+                .OrderByDescending(group => group.Count() - 1)
+                // sorted by number of wins in decending order
+                .Select(group => $"{group.Key.PadRight(20)} | points: {group.Count() - 1}");
+                // list of strings eg. "teamName             | points: 1"
+                // we have to subtract one from count because we added all the teams to the winning teams so they are counted twice
+            foreach (string score in scores)
+            {
+                Console.WriteLine(score);
+            }
+        }
+
+        public void ShowScore(string tournamentName)
+        {
+            Tournament tournament = tournamentRepository.GetTournament(tournamentName);
+            IEnumerable<Round> rounds = GetRounds(tournament);
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            foreach (Team team in tournament.GetTeams())
+            {
+                dict[team.Name] = 0;
+            }
+            foreach (Round round in rounds)
+            {
+                foreach (Team team in round.GetWinningTeams())
+                {
+                    dict[team.Name] += 1;
+                }
+            }
+
+            IOrderedEnumerable<KeyValuePair<string, int>> orderedDict = dict.OrderByDescending(d => d.Value);
+            foreach (KeyValuePair<string, int> group in orderedDict)
+            {
+                string paddedTeamName = group.Key.PadRight(20);
+                int points = group.Value;
+                Console.WriteLine($"{paddedTeamName} | points: {points}");
+            }
         }
 
         public void ScheduleNewRound(string tournamentName, bool printNewMatches = true)
