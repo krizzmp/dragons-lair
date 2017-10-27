@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DragonsLair_1
 {
     public class Tournament
     {
+        private bool status = false;
         public string Name { get; set; }
 
         public Tournament(string tournamentName)
@@ -83,6 +86,12 @@ namespace DragonsLair_1
                 r.AddMatch(match1);
             }
             return r;
+        }
+
+        public void setStatus()
+        {
+            status = true;
+
         }
     }
 }
