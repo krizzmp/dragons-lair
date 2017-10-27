@@ -38,15 +38,15 @@ namespace DragonsLair_1
             }
         }
 
-        [TestMethod]
-        public void OneWinnerInLastRound()
-        {
-            // Verifies there is exactly one winner in last round
-            int numberOfRounds = currentTournament.GetNumberOfRounds();
-            Round currentRound = currentTournament.GetRound(numberOfRounds - 1);
-            int numberOfWinningTeams = currentRound.GetWinningTeams().Count;
-            Assert.AreEqual(1, numberOfWinningTeams);
-        }
+        //[TestMethod]
+        //public void OneWinnerInLastRound()
+        //{
+        //    // Verifies there is exactly one winner in last round
+        //    int numberOfRounds = currentTournament.GetNumberOfRounds();
+        //    Round currentRound = currentTournament.GetRound(numberOfRounds - 1);
+        //    int numberOfWinningTeams = currentRound.GetWinningTeams().Count;
+        //    Assert.AreEqual(1, numberOfWinningTeams);
+        //}
 
         [TestMethod]
         public void AllMatchesInPreviousRoundsFinished()
@@ -60,6 +60,32 @@ namespace DragonsLair_1
                     matchesFinished = false;
             }
             Assert.AreEqual(true, matchesFinished);
+        }
+
+        [TestMethod]
+        public void CanAddRound()
+        {
+            Round round = new Round();
+            round.AddMatch(new Match {FirstOpponent = new Team("abc"), SecondOpponent = new Team("bcd")});
+            currentTournament.AddRound(round);
+            Assert.AreEqual(round, currentTournament.GetRound(0));
+        }
+        [TestMethod]
+        public void CanChangeStatus() {
+            currentTournament.SetStatus(true);
+            Assert.AreEqual(true, currentTournament.Status);
+        }
+        [TestMethod]
+        public void CanAddFreeRider() {
+            Team team = new Team("test");
+            Round round = new Round();
+            round.AddFreeRider(team);
+            Assert.AreEqual(team, round.GetFreeRider());
+        }
+        [TestMethod]
+        public void ScheduleRoundForEmptyTournament() {
+            
+            //Assert.AreEqual(team, round.GetFreeRider());
         }
     }
 }

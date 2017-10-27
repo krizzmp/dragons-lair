@@ -6,9 +6,9 @@ namespace DragonsLair_1
 {
     public class Tournament
     {
-        private bool status = false;
+        public bool Status = false;
         public string Name { get; set; }
-        private List<Round> rounds = new List<Round>();
+        private readonly List<Round> rounds = new List<Round>();
 
         public Tournament(string tournamentName)
         {
@@ -90,10 +90,9 @@ namespace DragonsLair_1
             return rounds[idx];
         }
 
-        public void SetStatus()
+        public void SetStatus(bool finished = true)
         {
-            status = true;
-
+            Status = finished;
         }
     }
 }

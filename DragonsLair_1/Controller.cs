@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,7 +36,74 @@ namespace DragonsLair_1
 
         public void ScheduleNewRound(string tournamentName, bool printNewMatches = true)
         {
-            // Do not implement this method
+            Tournament tournament = tournamentRepository.GetTournament(tournamentName);
+            int numberOfRounds = tournament.GetNumberOfRounds();
+            List<Team> teams;
+            Round lastRound = null;
+            if (numberOfRounds == 0)
+            {
+                teams = tournament.GetTeams();
+            }
+            else
+            {
+                lastRound = tournament.GetRound(numberOfRounds - 1);
+                if (!lastRound.IsMatchesFinished())
+                {
+                    Console.WriteLine("the current round has not finished");
+                    Console.WriteLine("press enter to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+
+                teams = lastRound.GetWinningTeams();
+            }
+            if (teams.Count >= 2)
+            {
+                Random rnd = new Random();
+                teams = new List<Team>(teams.OrderBy(t => rnd.Next()));
+                Round newRound = new Round();
+                if (teams.Count % 2 == 1)
+                {
+                    Team oldFreeRider = lastRound?.GetFreeRider();
+                    foreach (Team team in teams)
+                    {
+                        if (team != oldFreeRider)
+                        {
+                            teams.Remove(team);
+                            newRound.AddFreeRider(team);
+                            break;
+                        }
+                    }
+                }
+
+                while (teams.Count != 0)
+                {
+                    Match match = new Match();
+                    Team first = teams[0];
+                    teams.RemoveAt(0);
+                    Team second = teams[0];
+                    teams.RemoveAt(0);
+                    match.FirstOpponent = first;
+                    match.SecondOpponent = second;
+                    newRound.AddMatch(match);
+                }
+                tournament.AddRound(newRound);
+                ShowRound(newRound);
+            }
+            else
+            {
+                tournament.SetStatus(true);
+            }
+        }
+
+        private void ShowRound(Round round)
+        {
+            foreach (Match match in round.matches)
+            {
+                Console.WriteLine($"{match.FirstOpponent.Name} vs. {match.SecondOpponent.Name}");
+            }
+            string freeRider = round.GetFreeRider()?.Name ?? "none";
+            Console.WriteLine($"free rider is: {freeRider}");
         }
 
         public void SaveMatch(string tournamentName, int roundNumber, string team1, string team2, string winningTeam)
@@ -55,5 +121,6 @@ namespace DragonsLair_1
             }
             return rounds;
         }
+        
     }
 }

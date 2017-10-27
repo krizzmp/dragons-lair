@@ -5,9 +5,9 @@ namespace DragonsLair_1
 {
     public class Round
     {
-        private List<Match> matches = new List<Match>();
-        Team FreeRider;
-        
+        public List<Match> matches = new List<Match>();
+        private Team FreeRider;
+
 
         public void AddMatch(Match m)
         {
@@ -67,23 +67,12 @@ namespace DragonsLair_1
             return LosingTeams;
         }
 
-        public void AddFreeRider(Team team){
-            //Round GetLastRound = lastround;
-
-            //List<Team> WinningTeams = GetWinningTeams();
-            //int HowManyTeams = WinningTeams.Count();
-
-            //if (HowManyTeams % 2 == 1)
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
+        public void AddFreeRider(Team team)
+        {
             FreeRider = team;
         }
-        public Team getFreeRider()
+
+        public Team GetFreeRider()
         {
             return FreeRider;
         }
