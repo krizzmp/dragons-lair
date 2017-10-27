@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DragonsLair_1
 {
     public class Tournament
     {
+        private bool status = false;
         public string Name { get; set; }
         private List<Round> rounds = new List<Round>();
 
@@ -85,6 +88,12 @@ namespace DragonsLair_1
         public Round GetRound(int idx)
         {
             return rounds[idx];
+        }
+
+        public void setStatus()
+        {
+            status = true;
+
         }
     }
 }
