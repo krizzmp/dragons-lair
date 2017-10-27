@@ -90,7 +90,7 @@ namespace DragonsLair_1
             return rounds[idx];
         }
 
-        public void setStatus()
+        public void SetStatus()
         {
             status = true;
 
