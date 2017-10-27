@@ -88,7 +88,7 @@ namespace DragonsLair_1
             return r;
         }
 
-        public void setStatus()
+        public void SetStatus()
         {
             status = true;
 
