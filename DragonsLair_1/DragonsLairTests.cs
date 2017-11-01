@@ -70,32 +70,36 @@ namespace DragonsLair_1
             currentTournament.AddRound(round);
             Assert.AreEqual(round, currentTournament.GetRound(1));
         }
+
         [TestMethod]
-        public void CanChangeStatus() {
+        public void CanChangeStatus()
+        {
             currentTournament.SetStatus(true);
             Assert.AreEqual(true, currentTournament.Status);
         }
+
         [TestMethod]
-        public void CanAddFreeRider() {
+        public void CanAddFreeRider()
+        {
             Team team = new Team("test");
             Round round = new Round();
             round.AddFreeRider(team);
             Assert.AreEqual(team, round.GetFreeRider());
         }
+
         [TestMethod]
-        public void ScheduleRoundForEmptyTournament() {
-            
-            //Assert.AreEqual(team, round.GetFreeRider());
+        public void TournamentStartsWithSingleRound()
+        {
+            Assert.AreEqual(1, currentTournament.GetNumberOfRounds());
         }
 
         [TestMethod]
         public void CanGetMatch()
         {
-            
             string Teamname = "Team4";
             Round round = new Round();
-            Match match2 = new Match { FirstOpponent = new Team("Team3"), SecondOpponent = new Team("Team4") };
-            Match match1 = new Match { FirstOpponent = new Team("Team1"), SecondOpponent = new Team("Team2") };
+            Match match2 = new Match {FirstOpponent = new Team("Team3"), SecondOpponent = new Team("Team4")};
+            Match match1 = new Match {FirstOpponent = new Team("Team1"), SecondOpponent = new Team("Team2")};
 
             round.AddMatch(match1);
             round.AddMatch(match2);
@@ -103,6 +107,7 @@ namespace DragonsLair_1
             //currentTournament.AddRound(round);
             Assert.AreEqual(match2, round.GetMatch(Teamname));
         }
+
         [TestMethod]
         public void CanGetTeam()
         {
@@ -112,6 +117,5 @@ namespace DragonsLair_1
             //currentTournament.AddRound(round);
             Assert.AreEqual(Teamname, TeamName);
         }
-
     }
 }
