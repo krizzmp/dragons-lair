@@ -114,17 +114,17 @@ namespace DragonsLair_1
 
         public Team GetTeam(string Teamname)
         {
-            Team FoundTeam = null;
-            List<Team> Teams = GetTeams();
-            foreach (Team team in Teams)
+            Team foundTeam = null;
+            List<Team> teams = GetTeams();
+            foreach (Team team in teams)
             {
                 if(Teamname == team.Name)
                 {
-                    FoundTeam = team;
+                    foundTeam = team;
                     break;
                 }
             }
-            return FoundTeam;
+            return foundTeam;
         }
 
 
