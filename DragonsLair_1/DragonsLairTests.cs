@@ -103,6 +103,15 @@ namespace DragonsLair_1
             //currentTournament.AddRound(round);
             Assert.AreEqual(match2, round.GetMatch(Teamname));
         }
+        [TestMethod]
+        public void CanGetTeam()
+        {
+            string Teamname = "The Coans";
+
+            string TeamName = currentTournament.GetTeam(Teamname).Name;
+            //currentTournament.AddRound(round);
+            Assert.AreEqual(Teamname, TeamName);
+        }
 
     }
 }
