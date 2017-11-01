@@ -2,7 +2,7 @@
 
 namespace DragonsLair_1
 {
-    class TournamentRepo
+    public class TournamentRepo
     {
         private Tournament winterTournament = new Tournament("Vinter Turnering");
 
