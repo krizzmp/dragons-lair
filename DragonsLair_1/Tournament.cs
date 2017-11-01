@@ -94,5 +94,12 @@ namespace DragonsLair_1
         {
             Status = finished;
         }
+
+        public Team GetTeam(string Teamname)
+        {
+            return null;
+        }
+
+
     }
 }

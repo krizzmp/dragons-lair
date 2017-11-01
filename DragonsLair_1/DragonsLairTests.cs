@@ -87,5 +87,23 @@ namespace DragonsLair_1
             
             //Assert.AreEqual(team, round.GetFreeRider());
         }
+
+        [TestMethod]
+        public void CanGetMatch()
+        {
+            
+            string Teamname = "Team4";
+            Round round = new Round();
+            Match match2 = new Match { FirstOpponent = new Team("Team3"), SecondOpponent = new Team("Team4") };
+            Match match1 = new Match { FirstOpponent = new Team("Team1"), SecondOpponent = new Team("Team2") };
+
+            round.AddMatch(match1);
+            round.AddMatch(match2);
+
+            //currentTournament.AddRound(round);
+            Assert.AreEqual(match2, round.GetMatch(Teamname));
+        }
+
+
     }
 }
