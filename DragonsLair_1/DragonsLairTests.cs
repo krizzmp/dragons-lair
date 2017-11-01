@@ -104,11 +104,5 @@ namespace DragonsLair_1
             Assert.AreEqual(match2, round.GetMatch(Teamname));
         }
 
-        [TestMethod]
-        public void CanSaveMatch()
-        {
-            
-        }
-
     }
 }
