@@ -16,21 +16,21 @@ namespace DragonsLair_1
 
         public Match GetMatch(string teamName)
         {
-            Match Foundmatch = null;
+            Match foundMatch = null;
             foreach (Match match in matches)
             {
                 if(match.FirstOpponent.Name == teamName)
                 {
-                    Foundmatch = match;
+                    foundMatch = match;
                     break;
                 }else if (match.SecondOpponent.Name == teamName)
                 {
-                    Foundmatch = match;
+                    foundMatch = match;
                     break;
                 } 
             }
 
-            return Foundmatch;
+            return foundMatch;
         }
 
         public bool IsMatchesFinished()

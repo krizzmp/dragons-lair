@@ -55,8 +55,7 @@ namespace DragonsLair_1
             }
             if (teams.Count >= 2) {
                 Random rnd = new Random();
-                //teams = new List<Team>(teams.OrderBy(t => rnd.Next()));
-                List<Team> randomTeams = new List<Team>();
+                List<Team> randomTeams = new List<Team>(); // <==> new List<Team>(teams.OrderBy(t => rnd.Next()));
                 while (teams.Count > 0) {
                     int randomNr = rnd.Next(0, teams.Count);
                     randomTeams.Add(teams[randomNr]);
@@ -66,7 +65,10 @@ namespace DragonsLair_1
 
                 Round newRound = new Round();
                 if (randomTeams.Count % 2 == 1) {
-                    Team oldFreeRider = lastRound?.GetFreeRider();
+                    Team oldFreeRider;
+                    if (lastRound != null) {
+                        oldFreeRider = lastRound.GetFreeRider();
+                    } else oldFreeRider = null;
                     foreach (Team team in randomTeams) {
                         if (team != oldFreeRider) {
                             randomTeams.Remove(team);
