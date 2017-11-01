@@ -131,7 +131,7 @@ namespace DragonsLair_1
             Match match = round.GetMatch(winningTeam);
             if (match != null && match.Winner == null)
             {
-                var winner = tournament.GetTeam(winningTeam);
+                Team winner = tournament.GetTeam(winningTeam);
                 match.Winner = winner;
                 return Result.Succes;
             }
