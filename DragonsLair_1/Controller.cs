@@ -124,9 +124,18 @@ namespace DragonsLair_1
             Console.WriteLine($"free rider is: {freeRider}");
         }
 
-        public void SaveMatch(string tournamentName, int roundNumber, string team1, string team2, string winningTeam)
+        public Result SaveMatch(string tournamentName, int roundNumber, string winningTeam)
         {
-            // Do not implement this method
+            Tournament tournament = tournamentRepository.GetTournament(tournamentName);
+            Round round = tournament.GetRound(roundNumber - 1);
+            Match match = round.GetMatch(winningTeam);
+            if (match != null && match.Winner == null)
+            {
+                var winner = tournament.GetTeam(winningTeam);
+                match.Winner = winner;
+                return Result.Succes;
+            }
+            return Result.Failure;
         }
 
         private IEnumerable<Round> GetRounds(Tournament tournament)
@@ -139,6 +148,10 @@ namespace DragonsLair_1
             }
             return rounds;
         }
-        
+    }
+
+    enum Result {
+        Succes,
+        Failure
     }
 }
