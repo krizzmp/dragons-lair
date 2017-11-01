@@ -13,51 +13,7 @@ namespace DragonsLair_1
         public Tournament(string tournamentName)
         {
             Name = tournamentName;
-            //Round r1 = new Round();
-            //Match match11 = new Match();
-            //match11.FirstOpponent = new Team("The Valyrians");
-            //match11.SecondOpponent = new Team("The Spartans");
-            //match11.Winner = new Team("The Valyrians");
-            //r1.AddMatch(match11);
-
-            //Match match12 = new Match();
-            //match12.FirstOpponent = new Team("The Cretans");
-            //match12.SecondOpponent = new Team("The Thereans");
-            //match12.Winner = new Team("The Thereans");
-            //r1.AddMatch(match12);
-
-            //Match match13 = new Match();
-            //match13.FirstOpponent = new Team("The Coans");
-            //match13.SecondOpponent = new Team("The Cnideans");
-            //match13.Winner = new Team("The Coans");
-            //r1.AddMatch(match13);
-
-            //Match match14 = new Match();
-            //match14.FirstOpponent = new Team("The Megareans");
-            //match14.SecondOpponent = new Team("The Corinthians");
-            //match14.Winner = new Team("The Corinthians");
-            //r1.AddMatch(match14);
-            //rounds.Add(r1);
-            //Round r2 = new Round();
-
-            //Match match21 = new Match();
-            //match21.FirstOpponent = new Team("The Valyrians");
-            //match21.SecondOpponent = new Team("The Thereans");
-            //match21.Winner = new Team("The Valyrians");
-            //r2.AddMatch(match21);
-
-            //Match match22 = new Match();
-            //match22.FirstOpponent = new Team("The Coans");
-            //match22.SecondOpponent = new Team("The Corinthians");
-            //match22.Winner = new Team("The Coans");
-            //r2.AddMatch(match22);
-
-            //Round r3 = new Round();
-            //Match match31 = new Match();
-            //match31.FirstOpponent = new Team("The Valyrians");
-            //match31.SecondOpponent = new Team("The Coans");
-            //match31.Winner = new Team("The Coans");
-            //r3.AddMatch(match31);
+            CreateRound();
         }
 
         public List<Team> GetTeams()
@@ -75,6 +31,67 @@ namespace DragonsLair_1
             });
         }
 
+        public void CreateRound()
+        {
+            List<Team> teams;
+            Round lastRound = null;
+            int numberOfRounds = GetNumberOfRounds();
+            if (numberOfRounds == 0) {
+                teams = GetTeams();
+            } else {
+                lastRound = GetRound(numberOfRounds - 1);
+                if (!lastRound.IsMatchesFinished()) {
+                    Console.WriteLine("the current round has not finished");
+                    Console.WriteLine("press enter to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+
+                teams = lastRound.GetWinningTeams();
+
+                Team lastFreeRider = lastRound.GetFreeRider();
+                if (lastFreeRider != null) {
+                    teams.Add(lastFreeRider);
+                }
+            }
+            if (teams.Count >= 2) {
+                Random rnd = new Random();
+                //teams = new List<Team>(teams.OrderBy(t => rnd.Next()));
+                List<Team> randomTeams = new List<Team>();
+                while (teams.Count > 0) {
+                    int randomNr = rnd.Next(0, teams.Count);
+                    randomTeams.Add(teams[randomNr]);
+                    teams.RemoveAt(randomNr);
+                }
+
+
+                Round newRound = new Round();
+                if (randomTeams.Count % 2 == 1) {
+                    Team oldFreeRider = lastRound?.GetFreeRider();
+                    foreach (Team team in randomTeams) {
+                        if (team != oldFreeRider) {
+                            randomTeams.Remove(team);
+                            newRound.AddFreeRider(team);
+                            break;
+                        }
+                    }
+                }
+
+                while (randomTeams.Count != 0) {
+                    Match match = new Match();
+                    Team first = randomTeams[0];
+                    randomTeams.RemoveAt(0);
+                    Team second = randomTeams[0];
+                    randomTeams.RemoveAt(0);
+                    match.FirstOpponent = first;
+                    match.SecondOpponent = second;
+                    newRound.AddMatch(match);
+                }
+                AddRound(newRound);
+            } else {
+                SetStatus(true);
+            }
+        }
         public void AddRound(Round round)
         {
             rounds.Add(round);

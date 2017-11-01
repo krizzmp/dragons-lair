@@ -68,7 +68,7 @@ namespace DragonsLair_1
             Round round = new Round();
             round.AddMatch(new Match {FirstOpponent = new Team("abc"), SecondOpponent = new Team("bcd")});
             currentTournament.AddRound(round);
-            Assert.AreEqual(round, currentTournament.GetRound(0));
+            Assert.AreEqual(round, currentTournament.GetRound(1));
         }
         [TestMethod]
         public void CanChangeStatus() {
@@ -104,6 +104,11 @@ namespace DragonsLair_1
             Assert.AreEqual(match2, round.GetMatch(Teamname));
         }
 
+        [TestMethod]
+        public void CanSaveMatch()
+        {
+            
+        }
 
     }
 }
