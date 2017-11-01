@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DragonsLair_1
 {
     [TestClass]
     public class DragonsLairTests
     {
-        Tournament currentTournament;
+        private Tournament currentTournament;
 
         [TestInitialize]
         public void SetupForTest()
@@ -37,16 +32,6 @@ namespace DragonsLair_1
                 Assert.AreEqual(numberOfWinningTeams, numberOfLosingTeams);
             }
         }
-
-        //[TestMethod]
-        //public void OneWinnerInLastRound()
-        //{
-        //    // Verifies there is exactly one winner in last round
-        //    int numberOfRounds = currentTournament.GetNumberOfRounds();
-        //    Round currentRound = currentTournament.GetRound(numberOfRounds - 1);
-        //    int numberOfWinningTeams = currentRound.GetWinningTeams().Count;
-        //    Assert.AreEqual(1, numberOfWinningTeams);
-        //}
 
         [TestMethod]
         public void AllMatchesInPreviousRoundsFinished()
@@ -96,7 +81,7 @@ namespace DragonsLair_1
         [TestMethod]
         public void CanGetMatch()
         {
-            string Teamname = "Team4";
+            string teamName = "Team4";
             Round round = new Round();
             Match match2 = new Match {FirstOpponent = new Team("Team3"), SecondOpponent = new Team("Team4")};
             Match match1 = new Match {FirstOpponent = new Team("Team1"), SecondOpponent = new Team("Team2")};
@@ -104,16 +89,15 @@ namespace DragonsLair_1
             round.AddMatch(match1);
             round.AddMatch(match2);
 
-            Assert.AreEqual(match2, round.GetMatch(Teamname));
+            Assert.AreEqual(match2, round.GetMatch(teamName));
         }
 
         [TestMethod]
         public void CanGetTeam()
         {
             string teamName = "The Coans";
-
             Team team = currentTournament.GetTeam(teamName);
-            //currentTournament.AddRound(round);
+
             Assert.AreEqual(teamName, team.Name);
         }
     }

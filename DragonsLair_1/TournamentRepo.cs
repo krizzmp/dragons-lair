@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DragonsLair_1
+﻿namespace DragonsLair_1
 {
     public class TournamentRepo
     {

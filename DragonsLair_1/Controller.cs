@@ -34,20 +34,10 @@ namespace DragonsLair_1
             }
         }
 
-        public void ScheduleNewRound(string tournamentName, bool printNewMatches = true)
+        public void ScheduleNewRound(string tournamentName)
         {
             Tournament tournament = tournamentRepository.GetTournament(tournamentName);
             tournament.CreateRound();
-        }
-
-        private void ShowRound(Round round)
-        {
-            foreach (Match match in round.matches)
-            {
-                Console.WriteLine($"{match.FirstOpponent.Name} vs. {match.SecondOpponent.Name}");
-            }
-            string freeRider = round.GetFreeRider()?.Name ?? "none";
-            Console.WriteLine($"free rider is: {freeRider}");
         }
 
         public Result SaveMatch(string tournamentName, int roundNumber, string winningTeam)

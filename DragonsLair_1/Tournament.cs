@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 
 namespace DragonsLair_1
 {
@@ -18,7 +17,7 @@ namespace DragonsLair_1
 
         public List<Team> GetTeams()
         {
-            return new List<Team>(new Team[]
+            return new List<Team>(new[]
             {
                 new Team("The Valyrians"),
                 new Team("The Spartans"),
@@ -107,18 +106,18 @@ namespace DragonsLair_1
             return rounds[idx];
         }
 
-        public void SetStatus(bool finished = true)
+        public void SetStatus(bool finished)
         {
             Status = finished;
         }
 
-        public Team GetTeam(string Teamname)
+        public Team GetTeam(string teamName)
         {
             Team foundTeam = null;
             List<Team> teams = GetTeams();
             foreach (Team team in teams)
             {
-                if(Teamname == team.Name)
+                if(teamName == team.Name)
                 {
                     foundTeam = team;
                     break;

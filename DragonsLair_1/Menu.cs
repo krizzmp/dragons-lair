@@ -4,7 +4,7 @@ namespace DragonsLair_1
 {
     public class Menu
     {
-        private Controller control = null;
+        private Controller control;
 
         public Menu()
         {
@@ -80,7 +80,7 @@ namespace DragonsLair_1
             string tournamentName = Console.ReadLine();
             Console.Write("Angiv runde: ");
             string round = Console.ReadLine();
-            int roundnr = int.Parse(round);
+            int roundnr = int.Parse(round??"1");
             Console.Write("Angiv vinderhold: ");
             string winner = Console.ReadLine();
             Console.Clear();
