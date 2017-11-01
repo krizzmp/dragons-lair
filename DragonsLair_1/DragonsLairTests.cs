@@ -104,18 +104,17 @@ namespace DragonsLair_1
             round.AddMatch(match1);
             round.AddMatch(match2);
 
-            //currentTournament.AddRound(round);
             Assert.AreEqual(match2, round.GetMatch(Teamname));
         }
 
         [TestMethod]
         public void CanGetTeam()
         {
-            string Teamname = "The Coans";
+            string teamName = "The Coans";
 
-            string TeamName = currentTournament.GetTeam(Teamname).Name;
+            Team team = currentTournament.GetTeam(teamName);
             //currentTournament.AddRound(round);
-            Assert.AreEqual(Teamname, TeamName);
+            Assert.AreEqual(teamName, team.Name);
         }
     }
 }
