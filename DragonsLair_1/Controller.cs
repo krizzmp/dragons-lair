@@ -150,7 +150,7 @@ namespace DragonsLair_1
         }
     }
 
-    enum Result {
+    public enum Result {
         Succes,
         Failure
     }
