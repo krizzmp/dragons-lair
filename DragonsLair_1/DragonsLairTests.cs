@@ -81,15 +81,18 @@ namespace DragonsLair_1
         [TestMethod]
         public void CanGetMatch()
         {
-            string teamName = "Team4";
+            string team4Name = "Team4";
+            string team1Name = "Team1"
             Round round = new Round();
-            Match match2 = new Match {FirstOpponent = new Team("Team3"), SecondOpponent = new Team("Team4")};
+            
             Match match1 = new Match {FirstOpponent = new Team("Team1"), SecondOpponent = new Team("Team2")};
+            Match match2 = new Match {FirstOpponent = new Team("Team3"), SecondOpponent = new Team("Team4")};
 
-            round.AddMatch(match1);
             round.AddMatch(match2);
+            round.AddMatch(match1);
 
-            Assert.AreEqual(match2, round.GetMatch(teamName));
+            Assert.AreEqual(match1, round.GetMatch(team1Name));
+            Assert.AreEqual(match2, round.GetMatch(team4Name));
         }
 
         [TestMethod]
