@@ -60,29 +60,38 @@ namespace DragonsLair_1
             if (teams.Count >= 2)
             {
                 Random rnd = new Random();
-                teams = new List<Team>(teams.OrderBy(t => rnd.Next()));
+                //teams = new List<Team>(teams.OrderBy(t => rnd.Next()));
+                List<Team> RandomTeams = new List<Team>();
+                while (teams.Count > 0)
+                {
+                    int randomNR = rnd.Next(0, teams.Count);
+                    RandomTeams.Add(teams[randomNR]);
+                    teams.RemoveAt(randomNR);
+                }
+
+
                 Round newRound = new Round();
-                if (teams.Count % 2 == 1)
+                if (RandomTeams.Count % 2 == 1)
                 {
                     Team oldFreeRider = lastRound?.GetFreeRider();
-                    foreach (Team team in teams)
+                    foreach (Team team in RandomTeams)
                     {
                         if (team != oldFreeRider)
                         {
-                            teams.Remove(team);
+                            RandomTeams.Remove(team);
                             newRound.AddFreeRider(team);
                             break;
                         }
                     }
                 }
 
-                while (teams.Count != 0)
+                while (RandomTeams.Count != 0)
                 {
                     Match match = new Match();
-                    Team first = teams[0];
-                    teams.RemoveAt(0);
-                    Team second = teams[0];
-                    teams.RemoveAt(0);
+                    Team first = RandomTeams[0];
+                    RandomTeams.RemoveAt(0);
+                    Team second = RandomTeams[0];
+                    RandomTeams.RemoveAt(0);
                     match.FirstOpponent = first;
                     match.SecondOpponent = second;
                     newRound.AddMatch(match);
