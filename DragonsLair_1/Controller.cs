@@ -97,7 +97,10 @@ namespace DragonsLair_1
                     newRound.AddMatch(match);
                 }
                 tournament.AddRound(newRound);
-                ShowRound(newRound);
+                if (printNewMatches)
+                {
+                    ShowRound(newRound);
+                }
             }
             else
             {
