@@ -87,5 +87,12 @@ namespace DragonsLair_1
             
             //Assert.AreEqual(team, round.GetFreeRider());
         }
+
+        [TestMethod]
+        public void LastFreeRiderMustContinueToNextRound() {
+
+            //Assert.AreEqual(team, round.GetFreeRider());
+        }
+
     }
 }
